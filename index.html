@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀My Nikusha🎀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+   body {
+        background: linear-gradient(135deg, #eeaeca, #edb2d6, #edb4d8, #e9ba94); /* Gradiente com suas cores */
+        color: #827f7d;
+        font-family: 'Verdana', sans-serif;
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        width: 100%;
+    }
+
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2); 
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sparkle {
+            font-size: 2em;
+            animation: sparkle 1.5s infinite alternate;
+            margin: 10px auto;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1); color: #ffcc00; }
+            50% { transform: scale(1.2); color: #ff6699; }
+            100% { transform: scale(1); color: #66ccff; }
+        }
+
+.message-box {
+    background: linear-gradient(135deg, #ffb3d9, #ff80bf); /* Gradiente suave inicial */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.4); /* Sombra interna para efeito 3D */
+    font-size: 1.1em;
+    color: #4d4c4c; /* Texto em preto para garantir contraste */
+    margin: 20px auto;
+    max-width: 90%;
+    cursor: pointer;
+    overflow: hidden;
+    transform: perspective(600px);
+    transition: height 0.3s ease, opacity 0.5s ease;
+    max-height: 70vh;
+    overflow-y: auto;
+    animation: gradientShift 50s ease-in-out infinite; /* Efeito de animação suave com transição lenta */
+}
+
+@keyframes gradientShift {
+    0% { background: linear-gradient(135deg, #ffb3d9, #ff80bf); }
+    25% { background: linear-gradient(135deg, #ff80bf, #ff99cc); }
+    50% { background: linear-gradient(135deg, #ff99cc, #ffb3d9); }
+    75% { background: linear-gradient(135deg, #ffb3d9, #ff80bf); }
+    100% { background: linear-gradient(135deg, #ff80bf, #ff99cc); }
+}
+
+
+
+        .message-content {
+            display: none;
+            opacity: 20;
+            transition: opacity 0.5s ease;
+        }
+
+        .message-box.open .message-content {
+            display: block;
+            opacity: 1;
+        }
+
+        .thank-you {
+            font-size: 1.5em;
+            color: #cc0033;
+            margin: 10px auto;
+            animation: pulse 1.5s infinite alternate;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .kirby-star {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            animation: star-fall 2s infinite;
+        }
+
+        @keyframes star-fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .fortune-cookie {
+            width: 80px;
+            height: 80px;
+            background: url('https://github.com/fcjoske/nikusha/blob/main/kirbywalk%20(1).gif?raw=true') no-repeat center;
+            background-size: contain;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.2s;
+        }
+
+        .fortune-cookie:hover {
+            transform: scale(1.1);
+        }
+
+        .fortune-message {
+            font-size: 1.2em;
+            color: #e28a18;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle">🎀 My Nikusha 🎀</div>
+
+    <div class="message-box" onclick="toggleMessage(this)">
+        Click to open the letter! ✉️
+        <div class="message-content">
+            Dear Nika, 💖<br><br>
+            Today is our second Valentine’s Day together, and what a beautiful journey we’ve had since the first message. From the moment we met, I knew there was something magical about you. 🌟<br><br>
+
+            We may be miles apart, but our hearts are forever intertwined. You are not only my love, but my best friend, my confidante, and my greatest source of joy. ❤️<br><br>
+
+            On this special day, I want you to know that you have the most beautiful eyes and smile in the entire world. 😍 Your beauty radiates not just on the outside, but also from the depth of your soul. 😊<br><br>
+
+            Thank you for being my companion, my cheerleader, and the one who makes life feel complete. When you read this, imagine me holding you tight in my arms, sending you all the warmth and love in my heart.❤️<br><br>
+
+            I am proud of everything you are, and I know that everyone around you is equally lucky to have you in their lives. 🌹<br><br>
+
+            With all my love,<br>
+            Felipe, your silly Brazilian and old man 💌<br><br>
+        </div>
+    </div>
+
+    <div class="thank-you">I love you <3</div>
+
+    <div class="kirby-star">
+        ✨
+    </div>
+
+    <div class="fortune-cookie" onclick="showFortune()"></div>
+    <div class="fortune-message" id="fortuneMessage"></div>
+
+    <script>
+        // Função para alternar a exibição da carta
+        function toggleMessage(box) {
+            box.classList.toggle('open');
+            const content = box.querySelector('.message-content');
+            content.style.display = box.classList.contains('open') ? 'block' : 'none';
+            content.style.opacity = box.classList.contains('open') ? '1' : '0';
+        }
+
+        // Frases de amor
+        const fortunes = [
+            "You are my sunshine on the darkest days. 🌞",
+            "In your arms, I found my home. 🏡",
+            "Every moment with you feels like a dream come true. 💖",
+            "You complete me in ways I never imagined. 🌹",
+            "I love you more than words can express. ❤️",
+            "You make my heart skip a beat every time. 💓",
+            "Together, we are unstoppable. 🌟",
+            "I’d choose you again and again, forever. 💍",
+            "You are my reason for everything. 🌈",
+            "You are the love of my life, my forever. 💕",
+            "Every time I see you, I fall in love all over again. 💘",
+            "With you, everything feels right. 🌺",
+            "Your love fills me with happiness every single day. 🌼",
+            "I could spend forever in your embrace. 🫂",
+            "You are my heart’s desire, my dream come true. 💞",
+            "Your smile is my favorite sight in the world. 😄",
+            "I am endlessly grateful for your love. 🌻",
+            "You are the best part of my every day. 🌞",
+            "In you, I found everything I was looking for. 💖",
+            "My love for you grows stronger every day. 🌹",
+            "I would rather be with you than anywhere else in the world. 🏝️",
+            "Every second without you feels like eternity. ⏳",
+            "You make my life beautiful simply by being in it. 💫",
+            "I can't imagine my world without you in it. 🌏",
+            "You are my perfect match. 🥰",
+            "I cherish every moment we spend together. 💕",
+            "With you, I have found true happiness. 😊",
+            "You light up my life in ways you can’t even imagine. 🌟",
+            "You are my everything. 💓",
+            "I’ll love you always and forever. 🕊️",
+            "Being with you is my greatest joy. 🥳",
+            "You make the world a better place just by being in it. 🌍",
+            "I fall more in love with you every day. 💝",
+            "You are my dream come true. 🌠",
+            "I love you more than all the stars in the sky. ✨",
+            "I can't wait to spend the rest of my life with you. 💍",
+            "You are the reason I wake up with a smile. 😊",
+            "With you, life is perfect. 💖",
+            "You are my soulmate. 💘",
+            "Every moment with you is a gift. 🎁",
+            "I’m the luckiest person in the world to have you. 🍀",
+            "You are the best thing that ever happened to me. 💝",
+            "Together, we are magic. 🪄",
+            "I love you with all my heart. ❤️",
+            "You are my happiness, my love. 🌼",
+            "You make me feel complete. 💞",
+            "Your love is my greatest treasure. 💎",
+            "I am forever yours. 💖",
+            "You are my heart’s desire. 💓",
+            "You make everything better just by being near. 🌟",
+            "You are my everything. 💕",
+            "Forever isn’t long enough with you. 🕊️",
+            "Your love is the most precious gift I’ve ever received. 🎁",
+            "You are my one and only. 💍",
+            "My heart beats for you. ❤️",
+            "You are my forever and always. 💘",
+            "I am so grateful for your love. 💝",
+            "You make my world brighter. 🌞",
+            "You are my best friend and my greatest love. 👫",
+            "Every day with you is a beautiful adventure. 🌍",
+            "You are the love of my life. 💖",
+            "My love for you is endless. 🌊",
+            "You make me a better person. 💫",
+            "With you, everything is possible. 🌠",
+            "You are my heart, my soul. 💞",
+            "I would go anywhere with you. 🛤️",
+            "You complete my soul. 🌹",
+            "Every moment with you is a blessing. 🙏",
+            "You are my heart’s home. 🏠",
+            "I love you beyond words. 💬",
+            "You make life worth living. 💖",
+            "You are my dream come true. 💤",
+            "I love you to the moon and back. 🌙",
+            "Together, we can conquer anything. ⚔️",
+            "You are my everything. 🌸",
+            "You are my best decision. 💭",
+            "Forever in love with you. 💕",
+            "My heart belongs to you. ❤️",
+            "You are my one true love. 💘",
+            "I’d be lost without you. 🧭",
+            "You complete me. 💑",
+            "I am so lucky to have you. 🍀",
+            "You make my life magical. ✨",
+            "You are the most important person in my life. 💝",
+            "Together, we make a perfect pair. 🧩",
+            "I will love you forever. 🕊️",
+            "You make my world more beautiful. 🌍",
+            "I will always choose you. 💍",
+            "I love you endlessly. ♾️",
+            "You are my person. 👫",
+            "You are my heart’s desire. 💓",
+            "I can’t imagine life without you. ⏳",
+            "You are my reason for living. 💖",
+            "You are my forever. 💍",
+            "Your love is all I need. ❤️",
+            "I want to grow old with you. 🕰️",
+            "I love everything about you. 💖",
+            "You are my world. 🌎",
+            "I will love you no matter what. 💞",
+            "You are my home, my heart. 🏡",
+            "Your love completes me. 💖",
+            "You are my everything. 💕",
+            "My heart beats for you. 💓",
+            "You are the love of my life. 💖",
+            "I will always love you. 🕊️",
+            "You are my forever and always. 💘",
+            "I love you with every part of me. 💕",
+            "You are my heart’s desire. 💓",
+            "I am grateful for you every day. 🙏",
+            "You are my soul mate. 💍",
+            "I would do anything for you. 💖",
+            "You are my world, my love. 🌎",
+            "You are my happiness. 💫",
+            "I will love you forever and always. 💝",
+            "You are my everything. 💕",
+            "With you, I feel complete. 💖"
+        ];
+
+        // Função para mostrar uma mensagem de sorte (amor)
+        function showFortune() {
+            const message = fortunes[Math.floor(Math.random() * fortunes.length)];
+            document.getElementById('fortuneMessage').innerText = message;
+        }
+    </script>
+</body>
+</html>
